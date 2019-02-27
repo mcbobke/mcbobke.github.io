@@ -1,0 +1,7 @@
+main:
+  - title: "Blog"
+    url: /blog
+  - title: "whoami"
+    url: /whoami
+  - title: "Resources"
+    url: /resources

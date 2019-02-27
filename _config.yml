@@ -42,8 +42,8 @@ tag_archive:
   type: liquid
   path: /tags/
 include: ["_pages"]
-# paginate: 5 # amount of posts to show
-# paginate_path: /page:num/
+paginate: 10 # amount of posts to show
+paginate_path: /blog/page:num/
 
 defaults:
   - scope:

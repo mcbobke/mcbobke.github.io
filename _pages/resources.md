@@ -2,7 +2,7 @@
 title: Resources
 permalink: /resources
 ---
-# Recommended Blogs
+## Recommended Blogs
 
 * [Ridicurious - Managed by Prateek Singh](https://ridicurious.com/)
 * [Kevin Marquette's Blog](https://kevinmarquette.github.io/)
