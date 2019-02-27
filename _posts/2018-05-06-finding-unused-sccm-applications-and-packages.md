@@ -1,7 +1,6 @@
 ---
 title: Finding Unused SCCM Applications and Packages
 date: 2018-05-06T21:33:49+00:00
-author: Matt Bobke
 permalink: /2018/05/06/finding-unused-sccm-applications-and-packages/
 categories:
   - PowerShell

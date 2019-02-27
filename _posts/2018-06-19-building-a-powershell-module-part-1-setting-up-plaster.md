@@ -1,7 +1,6 @@
 ---
 title: 'Building a PowerShell Module &#8211; Part 1 &#8211; Setting up Plaster'
 date: 2018-06-19T09:51:24+00:00
-author: Matt Bobke
 permalink: /2018/06/19/building-a-powershell-module-part-1-setting-up-plaster/
 categories:
   - PowerShell

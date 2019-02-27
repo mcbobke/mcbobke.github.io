@@ -1,7 +1,6 @@
 ---
 title: Building a PowerShell Module – Part 2 – Inspiration and What Lies Beneath
 date: 2018-07-14T10:13:52+00:00
-author: Matt Bobke
 permalink: /2018/07/14/building-a-powershell-module-part-2-inspiration-and-what-lies-beneath/
 categories:
   - PowerShell

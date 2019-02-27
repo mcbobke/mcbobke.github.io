@@ -1,7 +1,6 @@
 ---
 title: My Powershell Environment (For Now)
 date: 2018-04-19T11:00:55+00:00
-author: Matt Bobke
 permalink: /2018/04/19/my-powershell-environment-for-now/
 categories:
   - PowerShell

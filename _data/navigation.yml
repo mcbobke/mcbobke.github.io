@@ -1,5 +1,5 @@
 main:
-  - title: "Blog"
+  - title: "Recent Blog Posts"
     url: /blog
   - title: "whoami"
     url: /whoami

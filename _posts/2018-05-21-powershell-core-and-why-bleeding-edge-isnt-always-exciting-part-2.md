@@ -1,7 +1,6 @@
 ---
 title: PowerShell Core and Why Bleeding-Edge Isn’t Always Exciting – Part 2
 date: 2018-05-21T09:22:33+00:00
-author: Matt Bobke
 permalink: /2018/05/21/powershell-core-and-why-bleeding-edge-isnt-always-exciting-part-2/
 categories:
   - PowerShell

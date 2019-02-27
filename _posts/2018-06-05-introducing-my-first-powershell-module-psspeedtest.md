@@ -1,7 +1,6 @@
 ---
 title: 'Introducing My First PowerShell Module &#8211; PSSpeedTest'
 date: 2018-06-05T23:47:20+00:00
-author: Matt Bobke
 permalink: /2018/06/05/introducing-my-first-powershell-module-psspeedtest/
 categories:
   - PowerShell

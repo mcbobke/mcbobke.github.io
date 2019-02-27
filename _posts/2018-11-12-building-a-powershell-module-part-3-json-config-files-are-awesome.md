@@ -1,7 +1,6 @@
 ---
 title: 'Building a PowerShell Module &#8211; Part 3 &#8211; JSON Config Files are Awesome'
 date: 2018-11-12T11:28:18+00:00
-author: Matt Bobke
 permalink: /2018/11/12/building-a-powershell-module-part-3-json-config-files-are-awesome/
 categories:
   - PowerShell

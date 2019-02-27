@@ -1,7 +1,6 @@
 ---
 title: Why I Didn't Pursue Gamedev
 date: 2018-04-13T17:59:02+00:00
-author: Matt Bobke
 permalink: /2018/04/13/why-i-didnt-pursue-gamedev/
 categories:
   - Personal Musings

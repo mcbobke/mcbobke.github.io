@@ -1,7 +1,6 @@
 ---
 title: 'JAMFIT&#8217;s LDAP Sync Script &#8211; Converted from Python 2 to PowerShell'
 date: 2018-07-17T10:58:41+00:00
-author: Matt Bobke
 permalink: /2018/07/17/jamfits-ldap-sync-script-converted-from-python-2-to-powershell/
 categories:
   - PowerShell

@@ -1,7 +1,6 @@
 ---
 title: How I Fixed Printer WSD Hell
 date: 2018-05-02T17:15:24+00:00
-author: Matt Bobke
 permalink: /2018/05/02/how-i-fixed-printer-wsd-hell/
 categories:
   - PowerShell

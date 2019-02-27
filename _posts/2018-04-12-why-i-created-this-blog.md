@@ -1,7 +1,6 @@
 ---
 title: Why I Created this Blog
 date: 2018-04-12T22:21:46+00:00
-author: Matt Bobke
 permalink: /2018/04/12/why-i-created-this-blog/
 categories:
   - Personal Musings
