@@ -51,12 +51,6 @@ defaults:
       layout: single
       author_profile: true
       share: true
-  # _pages
-  - scope:
-      path: ""
-      type: pages
-    values:
-      layout: single
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
