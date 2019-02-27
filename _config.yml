@@ -29,7 +29,7 @@ github_username: mcbobke
 # Build settings
 markdown: kramdown
 # theme: minima
-theme: minimal-mistakes-jekyll
+remote_theme: "mmistakes/minimal-mistakes@4.15.2"
 minimal_mistakes_skin: "dark"
 locale: "en-US"
 search: true
