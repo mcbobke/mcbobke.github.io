@@ -54,6 +54,7 @@ defaults:
       toc_label: "Navigate this Post"
       toc_icon: "fas fa-search"
       layout: single
+      classes: wide
       author_profile: true
       share: true
   - scope:
