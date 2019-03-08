@@ -1,6 +1,12 @@
 main:
-  - title: "Recent Blog Posts"
+  - title: "Recent Posts"
     url: /blog
+  - title: "Archive"
+    url: /archive
+  - title: "Categories"
+    url: "/categories"
+  - title: "Tags"
+    url: "/tags"
   - title: "whoami"
     url: /whoami
   - title: "Resources"

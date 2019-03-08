@@ -4,15 +4,19 @@
 
 permalink: /
 layout: single
-title: Welcome to my website!
+title: Scripting Secures Success
 ---
-Hello!
 
-While I'm working on migrating my website from WordPress, here are links to some useful pages:
+## About Me
 
-* [Recent Posts](/blog/)
-* [Archive](/archive)
-* [Posts by Category](/categories)
-* [Posts by Tag](/tags)
+Hi! I'm Matt Bobke. I'm currently a Desktop Support Specialist at Blizzard Entertainment in Irvine, California. My Bachelors degree is in Computer Game Science, but I developed a passion for shell scripting and systems administration during my time studying Computer Science.
 
-You'll see this website change rapidly (given time to work on it, of course) as I move away from WordPress. Thanks for being patient!
+I fell in love with PowerShell after getting my first IT job and realizing that I could take what I learned from my Computer Science and software engineering courses and apply it to developing scripts that are useful in an enterprise IT environment. I want to share my experiences with PowerShell and other tools with readers, both so that they can learn from my mistakes and so that I can reinforce my own learning.
+
+## Projects
+
+### PSSpeedTest
+
+[PSSpeedTest](https://github.com/mcbobke/PSSpeedTest) is a PowerShell module for testing network bandwidth over the internet as well as private networks.
+
+<a href='https://planetpowershell.com'><img src='/images/planetpowershell-featured-badge.png' /></a>

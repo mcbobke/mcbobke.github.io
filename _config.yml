@@ -21,14 +21,25 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://mattbobke.com" # the base hostname & protocol for your site, e.g. http://example.com
 repository: mcbobke/mcbobke.github.io
+logo: "/images/IMG_0398.jpeg"
 twitter_username: mattbobke
 github_username: mcbobke
 author:
   name: "Matt Bobke"
   avatar: "/images/IMG_0398.jpeg"
   location: "Aliso Viejo, CA"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-github-square"
+      url: "https://github.com/mcbobke"
+    - label: "Twitter"
+      icon: "fab fa-twitter-square"
+      url: "https://twitter.com/mattbobke"
 footer:
   links:
+    - label: "GitHub"
+      icon: "fab fa-github-square"
+      url: "https://github.com/mcbobke"
     - label: "Twitter"
       icon: "fab fa-twitter-square"
       url: "https://twitter.com/mattbobke"
