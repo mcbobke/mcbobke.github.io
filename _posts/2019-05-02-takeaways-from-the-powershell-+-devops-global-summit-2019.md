@@ -18,6 +18,8 @@ The [OnRamp Track](https://powershell.org/summit/summit-onramp/) is "a distinct 
 
 Additionally, PowerShell.org offered an application-based [scholarship program](https://powershell.org/summit/summit-onramp/onramp-scholarship/) that provided those awarded with free admission to the OnRamp track, five nights in a hotel, and round-trip airfare. I submitted an application and was honored to be awarded the scholarship.
 
+We were also paired with volunteer mentors from the general conference as a part of the OnRamp "buddy" system. Mine were [Mathias Jessen](https://twitter.com/IISResetMe) and [Daniel Krebs](https://twitter.com/Dan1el42) who were both so friendly and willing to answer any questions that I had. I got a lot of direction about my career from speaking with them.
+
 ## Sunday Night Arrival and Monday
 
 I flew in on Sunday night and arrived at the Seattle Marriott Bellevue around 9:30PM. I checked in to my room and noticed other conference attendees in the lobby sitting at the bar. One piece of advice that was consistently given to me in the weeks leading up to the convention was to approach anyone and everyone to talk about their experiences in the world of PowerShell and IT in general. I dropped my belongings in my room, went back to the lobby and immediately was welcomed into the crowd. A few others recognized me from Twitter, which is the first time that's ever happened to me.
