@@ -43,6 +43,11 @@ footer:
     - label: "Twitter"
       icon: "fab fa-twitter-square"
       url: "https://twitter.com/mattbobke"
+analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: "UA-139643387-1"
+    anonymize_ip: false
 
 # Build settings
 markdown: kramdown
