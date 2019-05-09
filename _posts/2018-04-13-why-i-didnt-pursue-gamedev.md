@@ -14,6 +14,7 @@ tags:
   - scripting
   - skills
   - sysadmin
+toc: false
 ---
 One of the first series of video games that I followed was Tony Hawk's Pro Skater. Skating through locations based all over the world, throwing your character off of rooftops while doing trick after trick to build up a huge combo score, winning multiplayer competitions against computer-controlled skaters and even your own friends - all of these things made me want to **be a skater**. I convinced my parents that I _needed_ a skateboard, skate shoes, and tee shirts from any and every skating brand that I could find. Since I grew up just up the street from the local elementary school, I'd start out practicing there on the flat asphalt and work my way up to bombing pools at the local skate park. After all, how hard could it be? If Tony Hawk and all of his pro-skater buddies can do all of this effortlessly, so could I!
 

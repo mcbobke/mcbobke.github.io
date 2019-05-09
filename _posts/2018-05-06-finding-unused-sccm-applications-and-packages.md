@@ -14,11 +14,11 @@ tags:
 ---
 In preparation for an SCCM cleanup project, I was tasked with compiling a list of all Applications and Packages that were not being deployed and had no dependent task sequences or deployment types. Here's how I did it with PowerShell.
 
-# Before we begin: The ConfigMgr Module
+## Before we begin: The ConfigMgr Module
 
 Microsoft's `ConfigurationManager` module needs to be installed prior to running this script, or it will fail. You can grab the installer [here](https://www.microsoft.com/en-us/download/details.aspx?id=46681).
 
-# Filter, filter, filter
+## Filter, filter, filter
 
 We need to start with a list of all Applications and Packages and filter down from there. The following code accomplishes this and additionally filters the Applications to our desired results since the objects returned by `Get-CMApplication` provide all the properties that we need to query.
 

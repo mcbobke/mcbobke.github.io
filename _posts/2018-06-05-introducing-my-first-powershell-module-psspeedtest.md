@@ -13,7 +13,7 @@ tags:
 ---
 Writing a PowerShell module was a goal that I've had for myself since I learned of [PowerShell Gallery](https://www.powershellgallery.com/) and helper modules such as [Plaster](https://github.com/PowerShell/Plaster), [PSDeploy](https://github.com/RamblingCookieMonster/PSDeploy), [BuildHelpers](https://github.com/RamblingCookieMonster/BuildHelpers), [InvokeBuild](https://github.com/nightroman/Invoke-Build), and [Pester](https://github.com/pester/Pester). I have never worked with CI/CD build pipelines prior to this and a tool like [AppVeyor](https://www.appveyor.com/) was extremely foreign. I'm really happy with the progress that I've made, and while it isn't perfect by any means, it works!
 
-# Background
+## Background
 
 When I decided that I wanted to write a module, I had the same thought that I've had plenty of times in the past when I set out to make a video game: _I have no idea what I actually want to make_. However, I did know that I wanted to try my best to check a few boxes with my first module:
 
@@ -23,7 +23,7 @@ When I decided that I wanted to write a module, I had the same thought that I've
 
 I've recently done some work with [iPerf](https://iperf.fr/) to test some internal network connections in the office, and I realized that network bandwidth testing was a simple concept (user-friendly), small in scale, useful in an enterprise environment, and useful to the general public. I found that common public network bandwidth testing tools such as [Speedtest by Ookla](http://www.speedtest.net/) don't have a public API, but iPerf does have a Chocolatey package available. Thus, [PSSpeedTest](https://github.com/mcbobke/PSSpeedTest) was born.
 
-# Features
+## Features
 
 * **Set-SpeedTestConfig** sets the JSON configuration file that stores default speed test servers/ports for public internet and local network speed tests.
 * **Get-SpeedTestConfig** prints the current default configuration to the screen.
@@ -32,7 +32,7 @@ I've recently done some work with [iPerf](https://iperf.fr/) to test some intern
 
 I'm still trying to determine what the best means of documenting each function is; currently each function has detailed comment-based help available with `Get-Help FunctionName -Full`, but [platyPS](https://github.com/PowerShell/platyPS) might be a better and more readily-available option that doesn't require installing the module prior to reading the help. I'd rather not have the full usage of each function detailed in the primary module readme.
 
-# Future Plans
+## Future Plans
 
 * Better help
 * A means of decommissioning a speed test server deployed via `Install-SpeedTestServer`

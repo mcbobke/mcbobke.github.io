@@ -14,7 +14,7 @@ tags:
 ---
 My roommate and I have both been diving into scripting in our free time, him mostly in Bash and myself in Powershell. A couple months ago, he mentioned to me that he was proud of his `.bashrc` and walked me through some of its features. I had read about Powershell profile scripts in _Learn Windows Powershell in a Month of Lunches_ and had yet to take a closer look at them. After a fair bit of trial and error to mold my profile into what I want it to be, I'm here to explain its features and the rest of my Powershell environment. You can find the repository [here](https://github.com/mcbobke/Powershell-Environment).
 
-# profile.ps1
+## profile.ps1
 
 With any shell, knowing that you are running with administrative rights is imperative to avoiding catastrophe. A quick Google search resulted in an [easy way](https://social.technet.microsoft.com/Forums/lync/en-US/1ab8cd29-c205-440d-99e9-59ed66943f57/check-whether-the-powershell-is-running-in-elevated-mode-or-no?forum=ITCG) to test this via a short function, which looks like this at the top of my profile:
 
@@ -76,7 +76,7 @@ $env:Path += ";C:\Program Files\OpenSSH"
 $env:Path += ";C:\Program Files (x86)\Windows Kits\10\Debuggers\x64"
 ```
 
-# Installing OpenSSH and WinDbg
+## Installing OpenSSH and WinDbg
 
 Microsoft's work on porting OpenSSH to Windows inspired me to bring it into my Powershell environment. I must admit, I still find myself using Putty regularly due to its Saved Sessions and easy private key authentication setup; my work with OpenSSH has been more experimental than anything, at least until I force myself to switch. [These instructions](https://github.com/PowerShell/Win32-OpenSSH/wiki/Install-Win32-OpenSSH) are replicated in `Install-WinOpenSSH.ps1`, and reversed in `Uninstall-WinOpenSSH.ps1`.
 
@@ -95,11 +95,11 @@ $downloadUrl = $response `
 
 That download link is then used to retrieve the setup executable, which is stored and used to install WinDbg. If `Uninstall-WinDbg.ps1` is executed, that same executable is used.
 
-# Putting this All Together
+## Putting this All Together
 
 `Invoke-EnvironmentSetup.ps1` and `Invoke-EnvironmentTeardown.ps1` are provided for the automated install and uninstall of my environment. I don't think much of anything in these scripts warrants much explanation here as they mostly just copy files around and run the above helper scripts. If there are any specific questions about these scripts or details in the other scripts that I didn't cover, please comment!
 
-# Discoveries and Future Considerations
+## Discoveries and Future Considerations
 
 A couple of key things that I learned:
 

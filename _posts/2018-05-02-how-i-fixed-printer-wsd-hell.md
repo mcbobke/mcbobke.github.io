@@ -10,6 +10,7 @@ tags:
   - printerlogic
   - printers
   - wsd
+toc: false
 ---
 One of the most interesting projects that I've gotten to work on has been the migration from a Windows print server to [PrinterLogic](https://www.printerlogic.com/). At Blizzard's Irvine campus alone there are over 125 printers, all of different manufacturers and models due to the lack of a standardized purchasing process (until now, at least). With that many printers and drivers being used by a few thousand people, a physical low-powered Server 2008 machine was no longer the ideal option for a print share. The Print Spooler would often crawl away and hide in a corner somewhere, its long lifetime led to completely inconsistent and meaningless naming conventions, and simple changes such as updating printer drivers could bring things to a crawl.
 
@@ -39,7 +40,7 @@ foreach ($printer in $printers){
 $output | Sort-Object -property PrinterPort | Export-Csv -Path 'C:\Temp\printer\ports\export.csv' -Delimiter ','
 ```
 
-As you can see, I wanted to grab the IP of each printer with the `$port.PrinterHostAddress` property, but unfortunately the whole column came back blank in the CSV. Thankfully, simply changing this to `$port.DeviceURL` returned URLs of the form `http://10.130.17.225/StableWSDiscoveryEndpoint/schemas-xmlsoap-org_ws_2005_04_discovery` that contained the IP, which could then be filtered out by hand or by script.
+As you can see, I wanted to grab the IP of each printer with the `$port.PrinterHostAddress` property, but unfortunately the whole column came back blank in the CSV. Thankfully, simply changing this to `$port.DeviceURL` returned URLs of the form `http://192.168.0.25/StableWSDiscoveryEndpoint/schemas-xmlsoap-org_ws_2005_04_discovery` that contained the IP, which could then be filtered out by hand or by script.
 
 Once I had a CSV with columns for printer names, port names, and IP addresses, I could create a new TCP/IP port for each printer and assign it accordingly:
 
