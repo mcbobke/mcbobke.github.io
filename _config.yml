@@ -48,6 +48,12 @@ analytics:
   google:
     tracking_id: "UA-139643387-1"
     anonymize_ip: false
+repository: "mcbobke/mcbobke.github.io"
+comments:
+  provider: "utterances"
+  utterances:
+    theme: "github-dark"
+    issue_term: "pathname"
 
 # Build settings
 markdown: kramdown
@@ -73,6 +79,7 @@ defaults:
       classes: wide
       author_profile: true
       share: true
+      comments: true
   - scope:
       path: "_pages"
       type: pages
@@ -81,6 +88,7 @@ defaults:
       toc_label: "Navigate this Page"
       toc_icon: "fas fa-search"
       layout: single
+      comments: true
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
