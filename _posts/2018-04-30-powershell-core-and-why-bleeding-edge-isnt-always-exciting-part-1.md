@@ -9,6 +9,7 @@ tags:
   - powershellcore
   - ps6
   - pscore
+toc: false
 ---
 
 When I learned about [PowerShell Core](https://blogs.msdn.microsoft.com/powershell/2018/01/10/powershell-core-6-0-generally-available-ga-and-supported/), I was a few months into diving deep into Windows PowerShell. I had already written a few scripts that I would consider "advanced" in some way, one of which being an earlier version of my script to [install WinDbg from the Win10 SDK](https://github.com/mcbobke/Powershell-Environment/blob/master/scripts/setuphelpers/Install-WinDbg.ps1). In the following chunk of code from that script, I scrape the link to download the setup executable from the [Windows 10 SDK webpage](https://developer.microsoft.com/en-US/windows/downloads/windows-10-sdk):
