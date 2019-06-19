@@ -30,8 +30,8 @@ function Test-Administrator {
 
 Next comes the `prompt` function. Whatever is written to the shell within this function will be what is displayed while Powershell waits for the next command. Using the `Test-Administrator` function, I write (ADMINISTRATOR) before anything else if it returns true; there's no mistaking that the shell is running with admin rights. Next, the common username/computer name/working directory string is written, but with color coding to make distinguishing each piece effortless. Finally, the Powershell default greater-than arrow is printed on the next line to allow as much horizontal space for a command as possible. Here's the result in both non-admin and admin mode, respectfully:
 
-![Non-Admin](https://mcbobke.github.io/images/powershell_2018-04-19_00-49-14.png "Non-Admin")
-![Admin](https://mcbobke.github.io/images/powershell_2018-04-19_00-48-51.png "Admin")
+![Non-Admin](/images/powershell_2018-04-19_00-49-14.png "Non-Admin")
+![Admin](/images/powershell_2018-04-19_00-48-51.png "Admin")
 
 And here's the code:
 
