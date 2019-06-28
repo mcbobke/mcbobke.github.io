@@ -18,7 +18,7 @@ If there's one cmdlet that you should memorize the name of, it's `Get-Help`. It'
 Now that your help files are up to date, you can try out `Get-Help` with some of the cmdlets that I'll be explaining further on in this post.
 
 ```text
-(ADMINISTRATOR) mbobke@IR-MBOBKE-WD : ~\Documents\Git\mcbobke.github.io
+(ADMINISTRATOR) mbobke@MBOBKE-DT : ~\Documents\Git\mcbobke.github.io
 >Get-Help -Name "Get-Member"
 
 NAME
@@ -47,6 +47,35 @@ The `-Full` switch for `Get-Help` is my first choice for cmdlets that I've 1) ne
 ![Get-Help -Name "Get-Member" -Full](/images/gethelp_full.gif "Get-Help -Name 'Get-Member' -Full")
 
 ### -Examples
+
+The `-Examples` switch for `Get-Help` is useful for skipping directly to any examples of cmdlet usage that are provided by the author. I tend to use this with cmdlets that I have used before but need a quick refresher on syntax. One in particular is `Get-ADComputer` from the ActiveDirectory module, I can never remember the syntax for the `-Filter` parameter off the top of my head.
+
+```text
+(ADMINISTRATOR) mbobke@MBOBKE-DT : ~\Documents\Git\mcbobke.github.io
+> Get-Help Get-ADComputer -Examples
+
+NAME
+    Get-ADComputer
+
+SYNOPSIS
+    Gets one or more Active Directory computers.
+...
+    -------------------------- EXAMPLE 2 --------------------------
+
+    C:\PS>Get-ADComputer -Filter 'Name -like "Fabrikam*"' -Properties IPv4Address | FT Name,DNSHostName,IPv4Address -A
+
+    name          dnshostname                ipv4address
+    ----          -----------                -----------
+    FABRIKAM-SRV1 FABRIKAM-SRV1.Fabrikam.com 10.194.99.181
+    FABRIKAM-SRV2 FABRIKAM-SRV2.Fabrikam.com 10.194.100.37
+
+    Description
+
+    -----------
+
+    Get all the computers with a name starting by a particular string and showing the name, dns hostname and IPv4 address.
+...
+```
 
 ### -Online
 
