@@ -1,6 +1,6 @@
 main:
   - title: "Recent Posts"
-    url: /blog
+    url: /
   - title: "Archive"
     url: /archive
   - title: "Categories"

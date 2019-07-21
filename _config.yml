@@ -16,7 +16,7 @@
 title: "Scripting Secures Success"
 name: "Matt Bobke"
 description: >- # this means to ignore newlines until "baseurl:"
-  A blog about my love for all things automation and administration
+  "A blog about my love for all things automation and administration."
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://mattbobke.com" # the base hostname & protocol for your site, e.g. http://example.com
 logo: "/images/IMG_0398.jpeg"
@@ -32,14 +32,15 @@ author:
     - label: "Twitter"
       icon: "fab fa-twitter-square"
       url: "https://twitter.com/mattbobke"
-footer:
+og_image: "/images/IMG_0398.jpeg"
+twitter:
+  username: "mattbobke"
+social:
+  type: "Person"
+  name: "Matt Bobke"
   links:
-    - label: "GitHub"
-      icon: "fab fa-github-square"
-      url: "https://github.com/mcbobke"
-    - label: "Twitter"
-      icon: "fab fa-twitter-square"
-      url: "https://twitter.com/mattbobke"
+    - "https://twitter.com/mattbobke"
+    - "https://linkedin.com/in/mattbobke"
 analytics:
   provider: "google-gtag"
   google:
@@ -51,16 +52,14 @@ comments:
   utterances:
     theme: "github-dark"
     issue_term: "pathname"
-
-og_image: "/images/IMG_0398.jpeg"
-twitter:
-  username: "mattbobke"
-social:
-  type: "Person"
-  name: "Matt Bobke"
+footer:
   links:
-    - "https://twitter.com/mattbobke"
-    - "https://linkedin.com/in/mattbobke"
+    - label: "GitHub"
+      icon: "fab fa-github-square"
+      url: "https://github.com/mcbobke"
+    - label: "Twitter"
+      icon: "fab fa-twitter-square"
+      url: "https://twitter.com/mattbobke"
 
 # Build settings
 markdown: kramdown
@@ -73,8 +72,12 @@ plugins:
   - jekyll-include-cache
 include: ["_pages","_posts"]
 paginate: 10 # amount of posts to show
-paginate_path: /blog/page:num/
+paginate_path: /page:num/
 defaults:
+  - scope:
+      path: ""
+    values:
+      author_profile: true
   - scope:
       path: "_posts"
       type: posts
@@ -84,7 +87,6 @@ defaults:
       toc_icon: "fas fa-search"
       layout: single
       classes: wide
-      author_profile: true
       share: true
       comments: true
   - scope:
