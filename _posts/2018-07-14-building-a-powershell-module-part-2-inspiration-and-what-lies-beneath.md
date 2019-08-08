@@ -15,11 +15,11 @@ tags:
 ---
 In my last post in this series, [Building a PowerShell Module - Part 1 - Setting up Plaster](https://mattbobke.com/2018/06/19/building-a-powershell-module-part-1-setting-up-plaster/), I detailed the contents and functionality of my Plaster module template. One detail that I should have included at the end is a visual of what the output of Plaster looks like as `Invoke-Plaster` runs with my manifest. Here's that before we begin the next post:
 
-![Invoke-Plaster Output](/images/powershell_2018-06-26_00-14-51.png)
+![Invoke-Plaster Output](/images/2018-07-building-a-powershell-module-part-2-inspiration-and-what-lies-beneath/invoke_plaster_output.png)
 
 Additionally, here's the resulting folder structure in the destination path:
 
-![Resulting Folder Structure](/images/explorer_2018-06-26_00-15-38.png)
+![Resulting Folder Structure](/images/2018-07-building-a-powershell-module-part-2-inspiration-and-what-lies-beneath/folder_structure.png)
 
 Now that the groundwork for the actual code base is laid out, I'd like to explain the background to how PSSpeedTest came about and why I've made the choices that I've made regarding its architecture.
 
@@ -29,7 +29,7 @@ Now that the groundwork for the actual code base is laid out, I'd like to explai
 
 At the office, we were running into the occasional computer that exhibited slow network speeds to internal resources. We weren't sure if it was a bad network interface setting such as the Speed & Duplex advanced property (which we had seen set to `100 Mbps Full Duplex` before), or something as simple as a faulty cable. What we did want to be sure of is that we identified slow network speeds on newly-deployed computers for new hires before they were used for the first time so that the issue could be troubleshooted immediately.
 
-![Network Driver](/images/rundll32_2018-07-10_22-29-35.png)
+![Network Driver](/images/2018-07-building-a-powershell-module-part-2-inspiration-and-what-lies-beneath/network_driver.png)
 
 Part of our new computer verification process requires the deployment technician who set up the computer to note its hostname, IP address, location, and any additional notes in a Cisco Webex Teams chat channel that our Desktop Support team monitors. Once we see one of our assigned new hires' computers has been deployed, we physically evaluate the computer, license software, and confirm that it's ready to go. During the length of time that both technicians are working with the computer, it's easy to miss slow network speeds simply because we don't perform any network-intensive work. Automating a network speed test as well as the gathering of additional information about the computer seemed like a great option!
 

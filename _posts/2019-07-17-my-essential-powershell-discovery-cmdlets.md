@@ -44,7 +44,7 @@ DESCRIPTION
 
 The `-Full` switch for `Get-Help` is my first choice for cmdlets that I've 1) never used before or 2) haven't used in a considerable amount of time. This returns the entirety of the help file for a single cmdlet which is then scrollable with Page Up/Page Down, Up/Down arrows, and the mouse wheel if you're in a GUI environment. It's very convenient to avoid the need to alt-tab into a web browser, especially on laptops.
 
-![Get-Help -Name "Get-Member" -Full](/images/gethelp_full.gif "Get-Help -Name 'Get-Member' -Full")
+![Get-Help -Name "Get-Member" -Full](/images/2019-07-my-essential-powershell-discovery-cmdlets/gethelp_full.gif "Get-Help -Name 'Get-Member' -Full")
 
 ### -Examples
 
