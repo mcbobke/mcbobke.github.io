@@ -1,7 +1,7 @@
 ---
 title: 'Deploy and Configure an AWS EC2 IIS Web Server with PowerShell and DSC'
-date: 2020-01-06
-permalink: /2020/01/06/deploy-and-configure-an-aws-ec2-iis-web-server-with-powershell-and-dsc/
+date: 2020-04-03
+permalink: /2020/04/03/deploy-and-configure-an-aws-ec2-iis-web-server-with-powershell-and-dsc/
 categories:
   - PowerShell
   - DSC
