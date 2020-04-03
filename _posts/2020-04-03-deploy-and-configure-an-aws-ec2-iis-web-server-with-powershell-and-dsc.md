@@ -13,7 +13,6 @@ tags:
   - SSM
   - EC2
 ---
-
 This past December I gave a talk at the [SoCal PowerShell User Group](https://www.meetup.com/SoCal-PowerShell-User-Group) about using the `AWSPowerShell` module to work with AWS and deploy an IIS web server into a VPC that is configured with AWS Systems Manager and PowerShell DSC. If you watched the recording or attended, you will remember that the scope of the presentation was large. With this blog post, I hope to add some clarity to the presentation. Let's walk through the script block by block and see what's going on. You can find the script that I ran for this presentation [here on GitHub](https://github.com/mcbobke/AWSPowerShellDemo) along with the slide deck. It would also be a good idea to have the [AWS Tools for PowerShell Cmdlet Reference](https://docs.aws.amazon.com/powershell/latest/reference/) open as well.
 
 For some information about how AWS provides a great management layer over DSC on Windows Instances, take a look at these resources:
@@ -22,9 +21,11 @@ For some information about how AWS provides a great management layer over DSC on
 * [Creating Associations that Run MOF Files](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-using-mof-file.html)
 * [Samples for deploying an AWS Systems Manager Association using the 'AWS-ApplyDSCMofs' Document](https://gist.github.com/austoonz/14ad194db6e55dcee96bf97ea07adb45)
 
-__Note__:If you are using AWS free tier, there may be a _very_ small fee (a few US cents) as a result of running through these commands as you read. I stuck as close to free tier as possible but I believe Systems Manager ends up charging for its execution time which is minimal.
+__Note__: If you are using AWS free tier, there may be a _very_ small fee (a few US cents) as a result of running through these commands as you read. I stuck as close to free tier as possible but I believe Systems Manager ends up charging for its execution time which is minimal.
 
 __Another Note__: Alongside the script that actually deploys and configures AWS resources, there is additionally the `AWSPowerShellDemoConfig.ps1` DSC Configuration. I will be mentioning the AWS-specific parts of this Configuration in this post but I'll avoid diving into DSC fundamentals. You would be better suited to read through [Microsoft's documentation](https://docs.microsoft.com/en-us/powershell/scripting/dsc/overview/overview?view=powershell-6) on DSC to get a grasp on general DSC usage.
+
+__Yet Another Note__: This is not the best way to provision infrastructure in an AWS account. There are better tools for the job such as CloudFormation or Terraform. This is purely for experimentation and example!
 
 ## AWS API Credential Setup
 
@@ -130,7 +131,7 @@ We need and Instance Role with an associated Instance Profile that will allow th
 For the latter two I've granted full access in this role. This can and __should__ be restricted further in real usage.
 
 ```powershell
-# The following JSON defines a policy document that allows EC2 instances to assume the AWS role that we are creating
+# The following JSON defines a policy document that allows EC2 instances to assume the AWS instance role that we are creating
 $trustRelationshipJson = @"
 {
     "Version": "2012-10-17",
@@ -232,4 +233,145 @@ We need four S3 buckets:
 * `dsc-status` - for storing DSC compliance summaries.
 * `dsc-output` - for storing the output of the configuration execution on our instance.
 
-## Store a Value in ParameterStore
+```powershell
+$mofBucket = New-S3Bucket -BucketName 'dsc-mofs'
+$reportBucket = New-S3Bucket -BucketName 'dsc-reports'
+$statusBucket = New-S3Bucket -BucketName 'dsc-status'
+$outputBucket = New-S3Bucket -BucketName 'dsc-output'
+```
+
+## Store a Secret Value in AWS SSM Parameter Store
+
+The [AWS Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) is essentially a key-value store for configuration data and secrets management. For our use case our parameter will be of the type `SecureString` which is encrypted and decrypted using the AWS Key Management Service (KMS). By including the value of the `SecureString` parameter in plaintext within this demo script I'm clearly defeating the purpose, but I'm assuming that you would otherwise upload this secret separately.
+
+```powershell
+# Writes an encrypted key-value pair to the Systems Manager parameter store
+Write-SSMParameter -Name 'WebsiteName' -Type SecureString -Value 'AWSPowerShellDemo'
+```
+
+## Referencing our Secret Value in DSC
+
+Let's take a small detour and take a look at the [example DSC configuration](https://github.com/mcbobke/AWSPowerShellDemo/blob/master/AWSPowerShellDemoConfig.ps1) that accompanies this demo. There are three things important to how this was written to work with the `AWS-ApplyDSCMofs` SSM document:
+
+1. By default, `AWS-ApplyDSCMofs` installs necessary DSC resource modules on your target machines automatically from the PowerShell Gallery. The call to `Import-DscResource` is what triggers this.
+2. The target node is `localhost`. With native DSC, targeting a remote host requires specifying the hostname of that machine. With `AWS-ApplyDSCMofs`, the node is always `localhost` because SSM is copying the configuration to the target machine and running it locally.
+3. The compiled MOF does not need to be named after the hostname of the machine that it will target. It can be whatever you want! You'll see this in the next section.
+
+So how do we reference our secret in our configuration? See [here](https://github.com/mcbobke/AWSPowerShellDemo/blob/master/AWSPowerShellDemoConfig.ps1#L101):
+
+```powershell
+xWebsite 'AWSPowerShellDemoWebsite' {
+    Name             = '{tagssm:WebsiteName}' # This is the token that will be replaced with the value of the encrypted string that we put in Parameter Store
+    Ensure           = 'Present'
+    SiteId           = 1
+    PhysicalPath     = 'C:\AWSPowerShellDemo'
+    ApplicationPool  = 'AWSPowerShellDemo'
+    State            = 'Started'
+    PreloadEnabled   = $false
+    EnabledProtocols = 'http'
+    DefaultPage      = 'index.html'
+    BindingInfo      = @(
+        MSFT_xWebBindingInformation {
+            Protocol  = 'http'
+            IPAddress = '*'
+            Port      = 80
+        }
+    )
+}
+```
+
+Here we're using token substitution as described in the [official AWS documentation](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-using-mof-file.html#systems-manager-state-manager-using-mof-file-tokens). `'{tagssm:WebsiteName}'` means "go get the value of the WebsiteName parameter in Parameter Store and insert it here".
+
+The ability to use token substitution and target the generic `localhost` node with `AWS-ApplyDSCMofs` means that we can write generalized DSC configurations that can be reused for any number of nodes that we want. We can also run _multiple_ different configurations against a single machine with the compliance of each separate configuration tracked. Cool!
+
+## Bringing it all Together
+
+We're just a few steps away from a successful configuration. First, let's create an output directory for the compiled MOF:
+
+```powershell
+# Create an output directory for the MOF, clean it if it already exists
+$desiredOutputPath = '.\output'
+if (-not (Test-Path -Path $desiredOutputPath)) {
+    New-Item -Path '.' -Name 'output' -ItemType Directory
+} else {
+    Get-ChildItem -Path $desiredOutputPath | Remove-Item -Force
+}
+```
+
+Next, let's build it and use some PowerShell magic to rename the compiled MOF to have the same `BaseName` as the script that contains the configuration:
+
+```powershell
+# Rename the output MOF to the same base name as the script
+$configurationScript = Get-Item -Path '.\AWSPowerShellDemoConfig.ps1'
+$fullPathToScript = $configurationScript.FullName
+$mofBuildOutput = & $fullPathToScript -OutputDir $desiredOutputPath
+Rename-Item -Path $mofBuildOutput.FullName -NewName "$($configurationScript.BaseName).mof"
+```
+
+Then upload the MOF to the S3 bucket that we created earlier specifically for MOFs (I'm using a loop to show an example of what this might look like if you build all of your MOFs to the same directory):
+
+```powershell
+foreach ($mof in (Get-ChildItem -Path $desiredOutputPath)) {
+    Write-S3Object -BucketName $mofBucket.BucketName -File $mof.FullName
+}
+```
+
+Alright, we're ready to create an SSM association between our EC2 instance and the `AWS-ApplyDSCMofs` document! First let's look at the code which ultimately calls `New-SSMAssociation`:
+
+```powershell
+$dscAssociationArgs = @{
+    AssociationName               = "AWSPowerShellDemoDSC"
+    Target                        = @(
+        @{
+            Key    = 'InstanceIds'
+            Values = @($newInstance.InstanceId)
+        }
+    )
+    Name                          = 'AWS-ApplyDSCMofs'
+    Parameter                     = @{
+        MofsToApply                 = 's3:us-west-1:dsc-mofs:AWSPowerShellDemoConfig.mof'
+        ServicePath                 = 'awsdsc'
+        MofOperationMode            = 'Apply'
+        ReportBucketName            = 'us-west-1:dsc-reports'
+        StatusBucketName            = 'us-west-1:dsc-status'
+        ModuleSourceBucketName      = 'NONE'
+        AllowPSGalleryModuleSource  = 'True'
+        ProxyUri                    = ''
+        RebootBehavior              = 'AfterMof'
+        UseComputerNameForReporting = 'False'
+        EnableVerboseLogging        = 'True'
+        EnableDebugLogging          = 'True'
+        ComplianceType              = 'Custom:DSC'
+        PreRebootScript             = ''
+    }
+    ScheduleExpression            = 'cron(0/30 * ? * * *)' # Every 30 minutes
+    S3Location_OutputS3BucketName = $outputBucket.BucketName
+}
+
+$ssmAssociation = New-SSMAssociation @dscAssociationArgs
+```
+
+Most of the parameters are well documented [here](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-using-mof-file.html#systems-manager-state-manager-using-mof-file-creating) but I wanted to discuss the `Target` parameter specifically. It takes a list of [Target](https://docs.aws.amazon.com/sdkfornet/v3/apidocs/index.html?page=SSM/TSSMTarget.html&tocid=Amazon_SimpleSystemsManagement_Model_Target) objects that are instantiated with the `Key` and `Values` properties. Here we're targeting a list of instance IDs that only contains the ID of our example EC2 instance. The AWS PowerShell reference is pretty slim on details about what to feed into this parameter but you can see better examples of what the CLI version of this looks like [here](https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting).
+
+## Give it a few minutes, and...
+
+Head over to the EC2 section of the AWS console and grab the public IP of your instance. Navigate to it in your browser and you'll be greeted with the familiar "Hello World!" that we all know and love. You can also view the Association in the SSM console and see it's compliance report, along with the S3 buckets that now contain output from the execution of the configuration and compliance checks. Feel free to RDP into the instance to poke around.
+
+Now let's clean up our AWS account to avoid incurring fees and leaving an instance open via RDP. __BIG NOTE__: If you are using your account for other things, don't just blindly run this! Clean it up by hand and don't delete things you care about.
+
+```powershell
+Remove-SSMAssociation -AssociationId $ssmAssociation.AssociationId -Force
+Remove-SSMParameter -Name 'WebsiteName' -Force
+Get-S3Bucket | Remove-S3Bucket -Force -DeleteBucketContent
+Remove-EC2Instance -InstanceId $newInstance.InstanceId -Force
+Remove-IAMRoleFromInstanceProfile -InstanceProfileName 'AWSPowerShellDemo' -RoleName 'AWSPowerShellDemo' -Force
+Remove-IAMInstanceProfile -InstanceProfileName 'AWSPowerShellDemo' -Force
+Unregister-IAMRolePolicy -PolicyArn 'arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore' -RoleName 'AWSPowerShellDemo' -Force
+Unregister-IAMRolePolicy -PolicyArn 'arn:aws:iam::aws:policy/AmazonS3FullAccess' -RoleName 'AWSPowerShellDemo' -Force
+Unregister-IAMRolePolicy -PolicyArn 'arn:aws:iam::aws:policy/AmazonEC2FullAccess' -RoleName 'AWSPowerShellDemo' -Force
+Remove-IAMRole -RoleName 'AWSPowerShellDemo' -Force
+```
+
+Make sure to visit the VPC and EC2 section of the AWS console and delete your VPC and security groups, respectfully.
+
+That's all, folks! Thank you for reading and if you have any questions please leave me a comment or hit me up via email or Twitter. I'd love to chat!
