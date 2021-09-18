@@ -22,7 +22,7 @@ url: "https://mattbobke.com" # the base hostname & protocol for your site, e.g. 
 logo: ""
 author:
   name: "Matt Bobke"
-  avatar: "/images/avatar.jpeg"
+  avatar: "/images/avatar.jpg"
   location: "Aliso Viejo, CA"
   email: "matt@mattbobke.com"
   links:
