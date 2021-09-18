@@ -19,10 +19,10 @@ description: >- # this means to ignore newlines until "baseurl:"
   "A blog about my love for all things automation."
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://mattbobke.com" # the base hostname & protocol for your site, e.g. http://example.com
-logo: "/images/IMG_0398.jpeg"
+logo: ""
 author:
   name: "Matt Bobke"
-  avatar: "/images/IMG_0398.jpeg"
+  avatar: "/images/avatar.jpeg"
   location: "Aliso Viejo, CA"
   email: "matt@mattbobke.com"
   links:
@@ -32,7 +32,7 @@ author:
     - label: "Twitter"
       icon: "fab fa-twitter-square"
       url: "https://twitter.com/mattbobke"
-og_image: "/images/IMG_0398.jpeg"
+og_image: "/images/avatar.jpg"
 twitter:
   username: "mattbobke"
 social:
