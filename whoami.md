@@ -8,7 +8,7 @@ Hi! I'm Matt Bobke. I'm currently an SRE for PlayStation in Aliso Viejo, Califor
 
 ## Projects
 
-### PSSpeedTest
+### mcadminbot
 
 [mcadminbot](https://github.com/mcbobke/mcadminbot) is a Discord bot that allows permitted server members and roles to administrate a Minecraft server over RCON through chat messages.
 
